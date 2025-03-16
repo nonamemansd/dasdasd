@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Opener</title>
+</head>
+<body>
+    <h1>Enter Website URL:</h1>
+    <input type="text" id="websiteUrl" value="https://www.example.com"><br><br>
+    <button onclick="sendSignal()">Open Website</button>
+    <script>
+        async function sendSignal() {
+            const websiteUrl = document.getElementById("websiteUrl").value;
+            try {
+                const response = await fetch('https://my-website-opener.onrender.com/open', {  // Замените на ваш Render URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ url: websiteUrl })
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log('Signal sent successfully!');
+                alert('Website URL sent successfully!');
+            } catch (error) {
+                console.error('There was a problem sending the signal:', error);
+                alert('Failed to send signal: ' + error);
+            }
+        }
+    </script>
+</body>
+</html>
